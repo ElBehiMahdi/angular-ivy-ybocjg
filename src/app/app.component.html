@@ -1,0 +1,86 @@
+<form #f="ngForm">
+<div class="form-group">
+<label>Id Produit</label>
+<input type="text" name="idProduit" [(ngModel)]="produit.idProduit" required #id="ngModel" class="form-control">
+
+<div *ngIf="id.invalid && id.touched">
+    <div *ngIf="id.errors?.required" class="alert alert-danger" role="alert">
+        Required
+    </div>
+</div>
+</div>
+
+<div class="form-group">
+<label>Code</label>
+<input type="text" name="code" [(ngModel)]="produit.code" required pattern = "[a-zA-Z-0-9]{8}" #code="ngModel" class="form-control">
+
+<div *ngIf="code.invalid && code.touched">
+    <div *ngIf="code.errors?.required" class="alert alert-danger" role="alert">
+        Required
+    </div>
+    <div *ngIf="code.errors?.pattern" class="alert alert-danger" role="alert">
+        Only 8 chars
+    </div>
+</div>
+</div>
+
+<div class="form-group">
+<label>Libelle</label>
+<input type="text" name="libelle" [(ngModel)]="produit.libelle" required minlength="3" #libelle="ngModel" class="form-control">
+
+<div *ngIf="libelle.invalid && libelle.touched">
+    <div *ngIf="libelle.errors?.required" class="alert alert-danger" role="alert">
+        Required
+    </div>
+    <div *ngIf="libelle.errors?.minlength" class="alert alert-danger" role="alert"> At least 3 Chars </div>
+</div>
+</div>
+
+<div class="form-group">
+<label >Prix Unitaire</label>
+<input type="number" name="prix" [(ngModel)]="produit.prixUnitaire" required pattern="[1-9][0-9]*" #prix="ngModel" class="form-control">
+
+<div *ngIf="prix.invalid && prix.touched">
+    <div *ngIf="prix.errors?.required" class="alert alert-danger" role="alert">
+        Required
+    </div>
+    <div *ngIf="prix.errors?.pattern" class="alert alert-danger" role="alert">
+        Only Chars
+    </div>
+</div>
+</div>
+
+<input type="submit" value="Suivant" [disabled]="f.invalid" (click)="addProduct(f.value)">
+
+<div *ngIf="f.valid">
+<div class="form-group">
+<label>Id Détail Produit</label>
+<input type="number" name="idDetail" class="form-control" [(ngModel)]="produit.idProduit">
+</div>
+
+<div class="form-group">
+<label for="">Date Creation</label>
+<input type="dateCreation" name="dateCreation" required class="form-control">
+</div>
+
+<div class="form-group">
+<label for="">Date Derniere Modification</label>
+<input type="dateModif" name="dateDerniereModif" required class="form-control">
+</div>
+
+<div class="form-group">
+<label>Categorie Produit</label>
+  <label for=""></label>
+  <select class="form-control" name="" id="">
+    <option value="Alimentaire">Alimentaire</option>
+    <option value="Electromenager" selected>Electromenager</option>
+    <option value="Quincaillerie">Quincaillerie</option>
+  </select>
+</div>
+</div>
+
+</form>
+<div *ngFor="let p of list">
+{{p.idProduit}}
+{{p.code}}
+</div>
